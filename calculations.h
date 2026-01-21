@@ -1,21 +1,24 @@
 // calculations.h
 //
-// Header file for calculation functions
-// (User Story #X - Replace with your actual user story)
+// Core Computation Module
+// Responsibilities:
+// - Provide firstCalculation() and secondCalculation()
+// - Display results to the console
+// - Integrate cleanly with menu input
 //
-// Requirements:
-// - Exposes calculation functions to be called externally
-// - Includes header guards to prevent multiple inclusion
+// Owned By: Calculations Team
 //
 
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
 // Function prototypes
-int add(int a, int b);
-int subtract(int a, int b);
-int multiply(int a, int b);
-double divide(int a, int b);
+void firstCalculation(int a, int b);
+void secondCalculation(int a, int b);
+
+// Optional: direct test function for independent testing
+void testCalculations(void);
 
 #endif // CALCULATIONS_H
+
 
