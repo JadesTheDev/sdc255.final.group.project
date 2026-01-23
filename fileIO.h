@@ -1,7 +1,10 @@
+// fileIO.h
+// Implement writetoFile()
+
 #include <stdio.h>
 
 void writetoFile(const char *fileIO.h) {
-  FILE *file = fopen(fileIO.h, "w");
+  FILE *file = fopen(fileIO.h, "w"); // open for writing
 
   if (file == NULL) {
     printf("Error opening file.\n");
@@ -9,5 +12,5 @@ void writetoFile(const char *fileIO.h) {
   }
   fputs("FileIO\n", file);
 
-  fclose(file);
+  fclose(file); // close the file
 }
