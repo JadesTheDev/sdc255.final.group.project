@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
+#include "fileIO.h"
  
 char readFile(const char *fileIO.c) {
 FILE *file = fopen(fileIO.c, "r");
