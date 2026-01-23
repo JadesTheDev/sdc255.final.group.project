@@ -1,3 +1,6 @@
+//fileIO.c
+//Implement readFile()
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
