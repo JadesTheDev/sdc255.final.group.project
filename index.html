@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDC255 Final Group Project</title>
-
-    <!-- IMPORTANT: relative path, no leading slash -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDC255 Final Group Project - Interactive Terminal</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <main class="container">
-        <h1>SDC255 Final Group Project</h1>
+  <main class="wrap">
+    <header class="header">
+      <h1>SDC255 Final Group Project</h1>
+      <p class="subtitle">
+        Interactive terminal demo for the menu-driven C application (simulated in the browser for testing).
+      </p>
+    </header>
 
-        <p>
-            This is a console-based C application developed for the SDC255 Agile
-            Development course. The project demonstrates modular programming,
-            menu-driven control flow, file I/O, and Scrum-based teamwork.
-        </p>
+    <section class="terminal" aria-label="Terminal">
+      <div id="output" class="output" role="log" aria-live="polite"></div>
 
-        <h2>Features</h2>
-        <ul>
-            <li>Menu-driven interface</li>
-            <li>Multiple calculation operations</li>
-            <li>File read/write functionality</li>
-            <li>Modular C source and header files</li>
-        </ul>
+      <form id="promptForm" class="prompt" autocomplete="off">
+        <span class="prompt-label">></span>
+        <input
+          id="input"
+          class="input"
+          type="text"
+          inputmode="text"
+          placeholder="Type here (e.g., 1) then press Enter"
+          autofocus
+        />
+        <button class="btn" type="submit">Enter</button>
+      </form>
 
-        <h2>Source Code</h2>
-        <p>
-            View the full repository on GitHub:
-        </p>
-        <a href="https://github.com/JadesTheDev/sdc255.final.group.project" target="_blank">
-            GitHub Repository
-        </a>
+      <div class="hint">
+        <span>Commands:</span>
+        <code>menu</code> <code>clear</code> <code>help</code>
+      </div>
+    </section>
 
-        <footer>
-            <p>SDC255 • Final Group Project</p>
-        </footer>
-    </main>
+    <footer class="footer">
+      <p>
+        Repo: <a id="repoLink" href="#" target="_blank" rel="noreferrer">GitHub Repository</a>
+      </p>
+    </footer>
+  </main>
+
+  <script src="./app.js"></script>
 </body>
 </html>
