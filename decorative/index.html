@@ -1,49 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SDC255 Final Group Project - Interactive Terminal</title>
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-<body>
-  <main class="wrap">
-    <header class="header">
-      <h1>SDC255 Final Group Project</h1>
-      <p class="subtitle">
-        Interactive terminal demo for the menu-driven C application (simulated in the browser for testing).
-      </p>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDC255 Final Group Project</title>
 
-    <section class="terminal" aria-label="Terminal">
-      <div id="output" class="output" role="log" aria-live="polite"></div>
+    <!-- ✅ correct path after you moved css into /decorative -->
+    <link rel="stylesheet" href="./decorative/styles.css" />
+  </head>
 
-      <form id="promptForm" class="prompt" autocomplete="off">
-        <span class="prompt-label">></span>
-        <input
-          id="input"
-          class="input"
-          type="text"
-          inputmode="text"
-          placeholder="Type here (e.g., 1) then press Enter"
-          autofocus
-        />
-        <button class="btn" type="submit">Enter</button>
-      </form>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1>SDC255 Final Group Project</h1>
+        <p class="sub">
+          Console-based C application (menu + option routing + calculations + file I/O).
+          This page is a <span class="chip">viewer + test harness</span> for your repo files.
+        </p>
+      </header>
 
-      <div class="hint">
-        <span>Commands:</span>
-        <code>menu</code> <code>clear</code> <code>help</code>
-      </div>
-    </section>
+      <section class="grid">
+        <!-- Left: file list -->
+        <aside class="panel">
+          <div class="panel__title">
+            <h2>Project Files</h2>
+            <button id="btnReload" class="btn" type="button">Reload</button>
+          </div>
 
-    <footer class="footer">
-      <p>
-        Repo: <a id="repoLink" href="#" target="_blank" rel="noreferrer">GitHub Repository</a>
-      </p>
-    </footer>
-  </main>
+          <div class="hint">
+            If a file says <b>Missing</b>, the path is wrong or the file isn’t where we think it is.
+          </div>
 
-  <script src="./app.js"></script>
-</body>
+          <ul id="fileList" class="filelist"></ul>
+
+          <div class="mini">
+            <div class="mini__row">
+              <span>Status:</span> <span id="statusText" class="status">Loading…</span>
+            </div>
+            <div class="mini__row">
+              <span>Tip:</span> Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> to hard refresh.
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right: terminal-ish viewer -->
+        <section class="terminal panel">
+          <div class="terminal__bar">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div class="terminal__title">
+              <span id="openFileName">Select a file to view</span>
+            </div>
+          </div>
+
+          <pre class="terminal__screen"><code id="codeViewer">Waiting for file selection…</code></pre>
+
+          <div class="terminal__footer">
+            <div class="footer__left">
+              <span class="chip">Repo Viewer</span>
+              <span class="chip">Path Checker</span>
+            </div>
+            <div class="footer__right">
+              <button id="btnCopy" class="btn btn--ghost" type="button">Copy</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <p>
+          If this loads locally but not on GitHub Pages, it’s almost always path/case sensitivity.
+          GitHub Pages is petty like that — like a professor who docks points for “teh”.
+        </p>
+      </footer>
+    </main>
+
+    <!-- ✅ correct path (app.js in root) -->
+    <script defer src="./app.js"></script>
+  </body>
 </html>
