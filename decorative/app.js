@@ -1,20 +1,21 @@
 // app.js - simple repo file viewer + path checker for GitHub Pages
+// IMPORTANT: this file runs from /decorative/, so all code files in /jade, /leah, /noah must use ../
 
 const FILES = [
   // Jade folder
-  "jade/main.c",
-  "jade/menu.c",
-  "jade/menu.h",
-  "jade/optionSelector.c",
-  "jade/optionSelector.h",
+  "../jade/main.c",
+  "../jade/menu.c",
+  "../jade/menu.h",
+  "../jade/optionSelector.c",
+  "../jade/optionSelector.h",
 
   // Leah folder
-  "leah/calculations.c",
-  "leah/calculations.h",
+  "../leah/calculations.c",
+  "../leah/calculations.h",
 
   // Noah folder
-  "noah/fileIO.c",
-  "noah/fileIO.h",
+  "../noah/fileIO.c",
+  "../noah/fileIO.h",
 ];
 
 const elFileList = document.getElementById("fileList");
@@ -43,20 +44,28 @@ function toastStatus(msg) {
 }
 
 function escapeHtml(str) {
-  return str.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function normalizePath(path) {
+  // Convert "../jade/main.c" into a real URL relative to THIS page location
+  return new URL(path, document.baseURI).toString();
 }
 
 async function checkFile(path) {
-  // We use fetch with HEAD first; if server doesn't allow HEAD, fallback to GET.
+  const url = normalizePath(path);
+
+  // Try HEAD, then GET fallback
   try {
-    const head = await fetch(path, { method: "HEAD" });
+    const head = await fetch(url, { method: "HEAD" });
     if (head.ok) return true;
-  } catch {
-    // ignore
-  }
+  } catch {}
 
   try {
-    const res = await fetch(path);
+    const res = await fetch(url);
     return res.ok;
   } catch {
     return false;
@@ -64,7 +73,8 @@ async function checkFile(path) {
 }
 
 async function loadFile(path) {
-  const res = await fetch(path);
+  const url = normalizePath(path);
+  const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Failed to load ${path} (HTTP ${res.status})`);
   }
@@ -96,13 +106,15 @@ function renderListItem(path, exists) {
   } else {
     li.addEventListener("click", () => {
       elOpenFileName.textContent = path;
-      elViewer.innerHTML =
-        escapeHtml(
-          `This file path did not load.\n\n` +
-          `Fix: Confirm the file exists exactly at:\n` +
-          `  /${path}\n\n` +
-          `Also check capitalization (GitHub Pages is case-sensitive).`
-        );
+      elViewer.innerHTML = escapeHtml(
+        `This file path did not load.\n\n` +
+          `Expected location:\n` +
+          `  ${normalizePath(path)}\n\n` +
+          `Fix checklist:\n` +
+          `- File exists at that exact path\n` +
+          `- Capitalization matches exactly (Pages is case-sensitive)\n` +
+          `- You pushed/committed the file\n`
+      );
       currentText = elViewer.textContent;
       toastStatus("Missing path ❌");
     });
@@ -135,7 +147,6 @@ async function init() {
   elViewer.textContent = "Waiting for file selection…";
   currentText = "";
 
-  // Check all paths and render results
   let okCount = 0;
 
   for (const path of FILES) {
