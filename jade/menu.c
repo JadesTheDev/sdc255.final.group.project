@@ -10,8 +10,12 @@ int menu(void)
 {
     int choice = 0;
 
-    // Clear the screen
-    system("clear");   // use "cls" if on Windows
+    // Clear the screen (portable)
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 
     // Display menu options
     printf("==== Main Menu ====\n");
@@ -28,4 +32,3 @@ int menu(void)
 
     return choice;
 }
-
