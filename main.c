@@ -2,11 +2,10 @@
 // Main Integration Function (User Story #7)
 //
 // Requirements hit:
-// - int main(void) (no inputs)
+// - int main(void)
 // - returns 0 on normal completion
 // - receives an option from menu()
-// - continuously loops mainLoop(option) until an exit condition is selected
-// - includes pertinent project headers + standard headers
+// - continuously loops mainLoop(option) until exit selected
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +13,7 @@
 #include "menu.h"
 #include "optionSelector.h"
 
-#define EXIT_OPTION 5   // assuming Menu has 5 options and #5 is Exit
+#define EXIT_OPTION 5
 
 int main(void)
 {
@@ -31,10 +30,9 @@ int main(void)
             break;
         }
 
-        // Pass the choice into the option selector/control flow
+        // Route the option to the correct logic
         mainLoop(option);
     }
 
     return 0;
 }
-
