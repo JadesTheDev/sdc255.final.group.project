@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 #include "optionSelector.h"
-#include "../leah/calculations.h"
-#include "../noah/fileIO.h"
+#include "calculations.h"
+#include "fileIO.h"
 
 void mainLoop(int option)
 {
@@ -16,12 +16,14 @@ void mainLoop(int option)
     switch (option)
     {
         case 1:
+            // First Calculation
             printf("Enter two numbers: ");
             scanf("%d %d", &a, &b);
             firstCalculation(a, b);
             break;
 
         case 2:
+            // Second Calculation
             printf("Enter two numbers: ");
             scanf("%d %d", &a, &b);
             secondCalculation(a, b);
@@ -44,7 +46,7 @@ void mainLoop(int option)
             }
             else
             {
-                printf("\nFailed to read data.txt (file missing or error)\n\n");
+                printf("\nFailed to read data.txt (missing or error)\n\n");
             }
             break;
         }
