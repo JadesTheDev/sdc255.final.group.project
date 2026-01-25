@@ -1,16 +1,7 @@
-// fileIO.h
-// Implement writetoFile()
+#ifndef FILEIO_H
+#define FILEIO_H
 
-#include <stdio.h>
+char* readFile(const char *filename);
+void writetoFile(const char *filename);
 
-void writetoFile(const char *fileIO.h) {
-  FILE *file = fopen(fileIO.h, "w"); // open for writing
-
-  if (file == NULL) {
-    printf("Error opening file.\n");
-    return;
-  }
-  fputs("FileIO\n", file);
-
-  fclose(file); // close the file
-}
+#endif
