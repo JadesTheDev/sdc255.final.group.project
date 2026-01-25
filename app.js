@@ -1,5 +1,4 @@
 // app.js - simple repo file viewer + path checker for GitHub Pages
-// This file runs from the SAME folder as index.html (repo root)
 
 const FILES = [
   "main.c",
@@ -46,14 +45,12 @@ function escapeHtml(str) {
 }
 
 function normalizePath(path) {
-  // Convert "main.c" into a real URL relative to THIS page location
   return new URL(path, document.baseURI).toString();
 }
 
 async function checkFile(path) {
   const url = normalizePath(path);
 
-  // Try HEAD, then GET fallback
   try {
     const head = await fetch(url, { method: "HEAD" });
     if (head.ok) return true;
@@ -158,3 +155,98 @@ async function init() {
 }
 
 init();
+
+// ------------------------------
+// Test Terminal (JS Harness)
+// Mirrors calculations.c behavior for GitHub Pages
+// ------------------------------
+const elA = document.getElementById("numA");
+const elB = document.getElementById("numB");
+const elTerm = document.getElementById("terminalOut");
+
+const btnCalc1 = document.getElementById("btnCalc1");
+const btnCalc2 = document.getElementById("btnCalc2");
+const btnMenuSim = document.getElementById("btnMenuSim");
+const btnClearTerminal = document.getElementById("btnClearTerminal");
+
+function termWrite(line = "") {
+  if (!elTerm) return;
+  elTerm.textContent += (elTerm.textContent ? "\n" : "") + line;
+  elTerm.parentElement.scrollTop = elTerm.parentElement.scrollHeight;
+}
+
+function termReset(msg = "Terminal ready…") {
+  if (!elTerm) return;
+  elTerm.textContent = msg;
+}
+
+function readNums() {
+  const a = Number(elA?.value);
+  const b = Number(elB?.value);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    return null;
+  }
+  return { a, b };
+}
+
+function firstCalculationJS(a, b) {
+  const result = a + b;
+  termWrite("[First Calculation]");
+  termWrite(`${a} + ${b} = ${result}`);
+  termWrite();
+}
+
+function secondCalculationJS(a, b) {
+  const result = a * b;
+  termWrite("[Second Calculation]");
+  termWrite(`${a} * ${b} = ${result}`);
+  termWrite();
+}
+
+if (btnClearTerminal) {
+  btnClearTerminal.addEventListener("click", () => termReset());
+}
+
+if (btnCalc1) {
+  btnCalc1.addEventListener("click", () => {
+    const nums = readNums();
+    if (!nums) {
+      termWrite("❌ Enter valid numbers for A and B first.");
+      return;
+    }
+    firstCalculationJS(nums.a, nums.b);
+  });
+}
+
+if (btnCalc2) {
+  btnCalc2.addEventListener("click", () => {
+    const nums = readNums();
+    if (!nums) {
+      termWrite("❌ Enter valid numbers for A and B first.");
+      return;
+    }
+    secondCalculationJS(nums.a, nums.b);
+  });
+}
+
+if (btnMenuSim) {
+  btnMenuSim.addEventListener("click", () => {
+    const nums = readNums();
+    if (!nums) {
+      termWrite("❌ Enter valid numbers for A and B first.");
+      return;
+    }
+
+    termWrite("==== Main Menu ====");
+    termWrite("1. First Calculation");
+    termWrite("2. Second Calculation");
+    termWrite("5. Exit");
+    termWrite("===================");
+    termWrite("Simulating: option 1 then option 2 then exit…");
+    termWrite();
+
+    firstCalculationJS(nums.a, nums.b);
+    secondCalculationJS(nums.a, nums.b);
+    termWrite("Exiting (simulated). ✅");
+  });
+}
