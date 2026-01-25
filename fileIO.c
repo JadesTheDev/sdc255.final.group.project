@@ -8,24 +8,21 @@
 char* readFile(const char *filename)
 {
     FILE *file = fopen(filename, "r");
-    char *buffer;
-    int ch;
-    int size = 0;
-
     if (file == NULL) return NULL;
 
-    buffer = (char*)malloc(1);
-    if (buffer == NULL)
-    {
+    char *buffer = (char*)malloc(1);
+    if (buffer == NULL) {
         fclose(file);
         return NULL;
     }
 
+    int ch;
+    int size = 0;
+
     while ((ch = fgetc(file)) != EOF)
     {
         char *temp = (char*)realloc(buffer, size + 2);
-        if (temp == NULL)
-        {
+        if (temp == NULL) {
             free(buffer);
             fclose(file);
             return NULL;
@@ -42,8 +39,7 @@ char* readFile(const char *filename)
 void writeFile(const char *filename)
 {
     FILE *file = fopen(filename, "w");
-    if (file == NULL)
-    {
+    if (file == NULL) {
         printf("Error opening file for writing.\n");
         return;
     }
