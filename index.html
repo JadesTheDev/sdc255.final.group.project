@@ -67,6 +67,37 @@
         </section>
       </section>
 
+      <!-- NEW: Terminal Test Harness -->
+      <section class="panel harness">
+        <div class="panel__title">
+          <h2>Test Terminal</h2>
+          <button id="btnClearTerminal" class="btn btn--ghost" type="button">Clear</button>
+        </div>
+
+        <div class="harness__body">
+          <div class="harness__row">
+            <label class="harness__label" for="numA">A</label>
+            <input id="numA" class="harness__input" type="number" step="1" placeholder="e.g. 4" />
+
+            <label class="harness__label" for="numB">B</label>
+            <input id="numB" class="harness__input" type="number" step="1" placeholder="e.g. 2" />
+          </div>
+
+          <div class="harness__buttons">
+            <button id="btnCalc1" class="btn" type="button">Run Calc 1 (Add)</button>
+            <button id="btnCalc2" class="btn" type="button">Run Calc 2 (Multiply)</button>
+            <button id="btnMenuSim" class="btn btn--ghost" type="button">Simulate Menu Flow</button>
+          </div>
+
+          <pre class="harness__terminal"><code id="terminalOut">Terminal ready…</code></pre>
+
+          <div class="hint">
+            Note: Browsers can’t execute C directly. This terminal runs a JS test harness that mirrors your C
+            calculations so you can verify behavior on GitHub Pages.
+          </div>
+        </div>
+      </section>
+
       <footer class="footer">
         <p>
           If this loads locally but not on GitHub Pages, it’s almost always path/case sensitivity.
