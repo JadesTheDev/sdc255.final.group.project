@@ -2,10 +2,11 @@
 // Option selector / control flow implementation
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "optionSelector.h"
-#include "calculations.h"
-#include "fileIO.h"
+#include "../leah/calculations.h"
+#include "../noah/fileIO.h"
 
 void mainLoop(int option)
 {
@@ -15,14 +16,12 @@ void mainLoop(int option)
     switch (option)
     {
         case 1:
-            // First Calculation
             printf("Enter two numbers: ");
             scanf("%d %d", &a, &b);
             firstCalculation(a, b);
             break;
 
         case 2:
-            // Second Calculation
             printf("Enter two numbers: ");
             scanf("%d %d", &a, &b);
             secondCalculation(a, b);
@@ -30,17 +29,28 @@ void mainLoop(int option)
 
         case 3:
             // Write to File
-            writeFile();
+            writeFile("data.txt");
+            printf("\nWrote to data.txt\n\n");
             break;
 
         case 4:
+        {
             // Read from File
-            readFile();
+            char *contents = readFile("data.txt");
+            if (contents)
+            {
+                printf("\n--- data.txt contents ---\n%s\n-------------------------\n\n", contents);
+                free(contents);
+            }
+            else
+            {
+                printf("\nFailed to read data.txt (file missing or error)\n\n");
+            }
             break;
+        }
 
         default:
             printf("Invalid option. Please choose 1-5.\n");
             break;
     }
 }
-
