@@ -251,3 +251,62 @@ kbd{
   border-radius: var(--radius);
   background: rgba(255,255,255,0.02);
 }
+
+/* ---- Test Harness Panel ---- */
+.harness{
+  margin-top: 14px;
+}
+
+.harness__body{
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.harness__row{
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.harness__label{
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+.harness__input{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.9);
+  outline: none;
+}
+
+.harness__input:focus{
+  border-color: rgba(118,189,255,0.35);
+  box-shadow: 0 0 0 3px rgba(118,189,255,0.08);
+}
+
+.harness__buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.harness__terminal{
+  margin: 0;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.35);
+  min-height: 180px;
+  max-height: 320px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.45;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: rgba(255,255,255,0.92);
+}
